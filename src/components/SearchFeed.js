@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { fetchFromAPI } from "../utils/fetchFromAPI";
 import Videos from "./Videos";
 import { useParams } from "react-router-dom";
+import Loader from "./Loader";
 
 function SearchFeed() {
   const [videos, setVideos] = useState([]);
@@ -14,6 +15,8 @@ function SearchFeed() {
       setVideos(data.items);
     });
   }, [searchTerm]);
+
+  if (!videos.length) return <Loader />;
   return (
     <Box p={2} sx={{ overflowY: "auto", height: "90vh", flex: 2 }}>
       <Typography variant="h4" mb={2} sx={{ color: "white" }}>

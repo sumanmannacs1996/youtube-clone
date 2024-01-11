@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Sidebar from "./Sidebar";
 import { fetchFromAPI } from "../utils/fetchFromAPI";
 import Videos from "./Videos";
+import Loader from "./Loader";
 
 function Feed() {
   const [selectedCatagory, setSelectedCatagory] = useState("New");
@@ -13,6 +14,8 @@ function Feed() {
       setVideos(data.items);
     });
   }, [selectedCatagory]);
+
+  if (!videos.length) return <Loader />;
   return (
     <Stack sx={{ flexDirection: { sx: "column", md: "row" } }}>
       <Box

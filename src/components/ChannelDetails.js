@@ -4,6 +4,7 @@ import { fetchFromAPI } from "../utils/fetchFromAPI";
 import { Box } from "@mui/material";
 import ChannelCard from "./ChannelCard";
 import Videos from "./Videos";
+import Loader from "./Loader";
 
 function ChannelDetails() {
   const [channelDetails, setChannelDetails] = useState(null);
@@ -20,7 +21,7 @@ function ChannelDetails() {
     );
   }, [id]);
 
-  console.log(id);
+  if (!videos.length) return <Loader />;
 
   return (
     <Box minHeight="95vh">
@@ -36,7 +37,7 @@ function ChannelDetails() {
         <ChannelCard channel={channelDetails} marginTop="-93px" />
       </Box>
       <Box p={2} display="flex" margin="auto">
-        <Box sx={{ mr: { sm: "100px" } }} />
+        <Box />
         <Videos videos={videos} />
       </Box>
     </Box>
